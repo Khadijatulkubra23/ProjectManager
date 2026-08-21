@@ -33,10 +33,20 @@ function Dashboard() {
           getTasks(),
         ])
 
-        setProjects(projectsData)
-        setTasks(tasksData)
+        // Make sure API responses are arrays
+        setProjects(
+          Array.isArray(projectsData)
+            ? projectsData
+            : []
+        )
+
+        setTasks(
+          Array.isArray(tasksData)
+            ? tasksData
+            : []
+        )
       } catch (error) {
-        console.error(error)
+        console.error('Dashboard API error:', error)
         setError('Unable to load dashboard data.')
       } finally {
         setLoading(false)
@@ -103,11 +113,17 @@ function Dashboard() {
   if (loading) {
     return (
       <div>
-        <h1 className="text-2xl font-bold text-white">
-          Dashboard
-        </h1>
+        <div className="mb-8">
+          <p className="text-sm text-purple-400">
+            Overview
+          </p>
 
-        <div className="mt-8 flex items-center justify-center py-20">
+          <h1 className="mt-1 text-3xl font-bold text-white">
+            Dashboard
+          </h1>
+        </div>
+
+        <div className="flex items-center justify-center py-20">
           <p className="text-slate-400">
             Loading dashboard...
           </p>
@@ -119,11 +135,17 @@ function Dashboard() {
   if (error) {
     return (
       <div>
-        <h1 className="text-2xl font-bold text-white">
-          Dashboard
-        </h1>
+        <div className="mb-8">
+          <p className="text-sm text-purple-400">
+            Overview
+          </p>
 
-        <div className="mt-6 rounded-xl border border-red-500/20 bg-red-500/10 p-5 text-red-400">
+          <h1 className="mt-1 text-3xl font-bold text-white">
+            Dashboard
+          </h1>
+        </div>
+
+        <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-5 text-red-400">
           {error}
         </div>
       </div>
@@ -181,15 +203,19 @@ function Dashboard() {
         })}
       </div>
       <div className="mt-6 grid gap-6 xl:grid-cols-2">
+
+        {/* Task Overview */}
         <div className="rounded-2xl border border-white/10 bg-[#11182b] p-6">
           <div className="mb-5">
             <h2 className="text-lg font-semibold text-white">
               Task Overview
             </h2>
+
             <p className="mt-1 text-sm text-slate-500">
               Current task distribution
             </p>
           </div>
+
           <div className="flex flex-col items-center gap-6 sm:flex-row">
             <div className="h-64 w-full sm:w-1/2">
               <ResponsiveContainer
@@ -211,10 +237,12 @@ function Dashboard() {
                     <Cell fill="#3B82F6" />
                     <Cell fill="#EC4899" />
                   </Pie>
+
                   <Tooltip
                     contentStyle={{
                       backgroundColor: '#11182b',
-                      border: '1px solid rgba(255,255,255,0.1)',
+                      border:
+                        '1px solid rgba(255,255,255,0.1)',
                       borderRadius: '12px',
                       color: '#fff',
                     }}
@@ -222,6 +250,7 @@ function Dashboard() {
                 </PieChart>
               </ResponsiveContainer>
             </div>
+
             <div className="w-full space-y-4 sm:w-1/2">
               {chartData.map((item, index) => {
                 const colors = [
@@ -229,6 +258,7 @@ function Dashboard() {
                   '#3B82F6',
                   '#EC4899',
                 ]
+
                 return (
                   <div
                     key={item.name}
@@ -241,10 +271,12 @@ function Dashboard() {
                           backgroundColor: colors[index],
                         }}
                       />
+
                       <span className="text-sm text-slate-400">
                         {item.name}
                       </span>
                     </div>
+
                     <span className="text-sm font-semibold text-white">
                       {item.value}
                     </span>
