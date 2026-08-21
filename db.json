@@ -1,0 +1,84 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Ahmed Khan",
+      "email": "ahmed@example.com",
+      "role": "Developer"
+    },
+    {
+      "id": "2",
+      "name": "Sara Ali",
+      "email": "sara@example.com",
+      "role": "Designer"
+    },
+    {
+      "id": "3",
+      "name": "Hassan Raza",
+      "email": "hassan@example.com",
+      "role": "Developer"
+    },
+    {
+      "id": "4",
+      "name": "Ayesha Malik",
+      "email": "ayesha@example.com",
+      "role": "Project Manager"
+    }
+  ],
+  "projects": [
+    {
+      "id": "3",
+      "name": "HR Management System",
+      "description": "Develop an internal system for managing employees and HR tasks.",
+      "status": "Completed"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Design homepage",
+      "description": "Create the homepage design and responsive layout.",
+      "projectId": null,
+      "assignedTo": "2",
+      "status": "Completed",
+      "priority": "High"
+    },
+    {
+      "id": "2",
+      "title": "Build navigation bar",
+      "description": "Implement the responsive navigation bar.",
+      "projectId": null,
+      "assignedTo": "1",
+      "status": "In Progress",
+      "priority": "Medium"
+    },
+    {
+      "id": "3",
+      "title": "Create login screen",
+      "description": "Build the login interface for the mobile application.",
+      "projectId": null,
+      "assignedTo": "3",
+      "status": "Todo",
+      "priority": "High"
+    },
+    {
+      "id": "4",
+      "title": "Employee database setup",
+      "description": "Prepare the initial employee data structure.",
+      "projectId": "3",
+      "assignedTo": "4",
+      "status": "Completed",
+      "priority": "Medium"
+    },
+    {
+      "id": "5",
+      "title": "API integration",
+      "description": "Connect the application with the backend API.",
+      "projectId": null,
+      "assignedTo": "1",
+      "status": "Todo",
+      "priority": "High"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
