@@ -1,7 +1,14 @@
 import axios from 'axios'
 import seedData from '../../db.json'
 
-const API_URL = import.meta.env.VITE_API_BASE_URL
+const configuredApiUrl = import.meta.env.VITE_API_BASE_URL
+
+const isProduction = import.meta.env.PROD
+
+const shouldUseLocalStorage =
+  isProduction ||
+  !configuredApiUrl ||
+  configuredApiUrl.includes('localhost')
 
 const STORAGE_KEY = 'projectFlowData'
 
@@ -106,13 +113,13 @@ const localApi = {
   },
 }
 
-const api = API_URL
-  ? axios.create({
-      baseURL: API_URL,
+const api = shouldUseLocalStorage
+  ? localApi
+  : axios.create({
+      baseURL: configuredApiUrl,
       headers: {
         'Content-Type': 'application/json',
       },
     })
-  : localApi
 
 export default api
